@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 
 import Header from './Header';
 import Speakers from './Speakers';
-import {data} from '../../SpeakerData';
 
 const App = () => {
   const [theme, setTheme] = useState("light");
@@ -12,7 +11,6 @@ const App = () => {
         }>
           <Header theme={theme}/>
           <Speakers
-            data={data}
             theme={theme}
             setTheme={setTheme}
           />

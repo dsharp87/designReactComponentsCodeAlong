@@ -27,6 +27,23 @@ const SpeakerImage = ({ id, first, last }) => {
     )
 }
 
+
+const SpeakerFavorite = ({favorite}) => {
+  return (
+    <div className="action padB1">
+        <span>
+            <i className={
+                favorite === true ?
+                    "fa fa-star orange" : "fa fa-star-o orange"
+                }
+            />{" "}
+            Favorite{" "}
+        </span>
+    </div>
+  )
+}
+
+
 const SpeakerDemographics = ({ first, last, bio, company, twitterHandle, favorite }) => {
     return (
         <div className="speaker-info">
@@ -35,15 +52,18 @@ const SpeakerDemographics = ({ first, last, bio, company, twitterHandle, favorit
                     {first} {last}
                 </h3>
             </div>
-            <p className="card-description">{bio}</p>
-            <div className="social d-flex flex-row mt-4">
-                <div className="company">
-                    <h5>Company</h5>
-                    <h6>{company}</h6>
-                </div>
-                <div className="twitter">
-                    <h5>Twitter</h5>
-                    <h6>{twitterHandle}</h6>
+            <SpeakerFavorite favorite={favorite} />
+            <div>
+                <p className="card-description">{bio}</p>
+                <div className="social d-flex flex-row mt-4">
+                    <div className="company">
+                        <h5>Company</h5>
+                        <h6>{company}</h6>
+                    </div>
+                    <div className="twitter">
+                        <h5>Twitter</h5>
+                        <h6>{twitterHandle}</h6>
+                    </div>
                 </div>
             </div>
         </div>
