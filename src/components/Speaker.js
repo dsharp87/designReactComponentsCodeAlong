@@ -72,13 +72,13 @@ const SpeakerDemographics = ({ first, last, bio, company, twitterHandle, favorit
     )
 }
 
-const Speaker = ({ key, speaker, showSessions, onfavoriteToggle }) => {
+const Speaker = ({ key, speaker, showSessions, onFavoriteToggle }) => {
     const { id, first, last, sessions} = speaker;
     return (
         <div key={key} className="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-sm-12 col-xs-12">
             <div className="card card-height p-4 mt-4">
                 <SpeakerImage id={id} first={first} last={last} />
-                <SpeakerDemographics {...speaker} onFavoriteToggle={onfavoriteToggle} />
+                <SpeakerDemographics {...speaker} onFavoriteToggle={onFavoriteToggle} />
             </div>
             {showSessions === true ?
                 <Sessions sessions={sessions} /> : null            
