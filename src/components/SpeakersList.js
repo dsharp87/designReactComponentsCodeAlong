@@ -1,14 +1,18 @@
-import useRequestSpeakers, {REQUEST_STATUS} from '../hooks/useRequestSpeakers';
+import useRequestDelay, {REQUEST_STATUS} from '../hooks/useRequestDelay';
 
 import React from 'react';
 import ReactPlaceHolder from 'react-placeholder';
 import Speaker from './Speaker';
+import {data} from '../../SpeakerData';
 
 const SpeakersList = ({showSessions}) => {
 
   const {
-    speakersData, requestStatus, error, onFavoriteToggle
-  } = useRequestSpeakers(2000);
+    data: speakersData,
+    requestStatus, 
+    error, 
+    updateRecord
+  } = useRequestDelay(2000, data);
 
   
 
@@ -34,7 +38,12 @@ const SpeakersList = ({showSessions}) => {
                       key={speaker.id} 
                       speaker={speaker} 
                       showSessions={showSessions} 
-                      onFavoriteToggle={() => {onFavoriteToggle(speaker.id);}}
+                      onFavoriteToggle={() => {
+                        updateRecord({
+                          ...speaker,
+                          favorite: !speaker.favorite
+                        });
+                      }}
                     />                  
                 )
             })}
