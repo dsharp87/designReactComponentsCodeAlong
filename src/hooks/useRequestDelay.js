@@ -18,6 +18,7 @@ function useRequestDelay(delayTime = 1000, initialData=[]) {
     async function delayFunc() {
         try {
             await delay(delayTime);
+            // to test error handling
             //throw "YEEAAAARRRGGGGGG";
             setRequestStatus(REQUEST_STATUS.SUCCESS);
             setData(initialData);
@@ -30,18 +31,24 @@ function useRequestDelay(delayTime = 1000, initialData=[]) {
     },[]);
     
     const updateRecord = (recordUpdated, doneCallback) => {
+        const originalRecords = [...data]
         const newRecords = data.map((record) => {
             return record.id === recordUpdated.id ? recordUpdated : record;
         });
 
         async function delayFunction() {
             try {
+                setData(newRecords);
                 await delay(delayTime);
+                //to test error handling
+                //throw "YEEAAAARRRGGGGGG";
                 if(doneCallback)
                     doneCallback();
-                setData(newRecords);
             } catch (error) {
                 console.log("error inside delay function", error);
+                if(doneCallback)
+                    doneCallback();
+                setData(originalRecords);
             }
         }
         delayFunction();
